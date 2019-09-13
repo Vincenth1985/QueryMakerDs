@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -21,8 +22,20 @@ public class WindowController {
     private ListView selectedFilesList;
 
 
-    private String fileToReadData;
+    @FXML
+    private TextField newVer;
 
+    @FXML
+    private TextField newReg;
+
+    @FXML
+    private TextField oldVer;
+
+    @FXML
+    private TextField oldReg;
+
+
+    private String fileToReadData;
 
 
     @FXML
@@ -41,8 +54,9 @@ public class WindowController {
 
     @FXML
     public void generateQuery(ActionEvent event) throws IOException {
+
         dataProcessing.readDataFromFile(fileToReadData);
-        dataProcessing.writeDataToFile();
+        dataProcessing.writeDataToFile(newVer.getText(), newReg.getText(), oldVer.getText(), oldReg.getText());
         selectedFilesList.getItems().clear();
         selectedFilesList.getItems().add("Sql File is generated");
 

@@ -34,7 +34,7 @@ public class DataProcessing {
     }
 
 
-    public void writeDataToFile() throws IOException {
+    public void writeDataToFile(String newVer, String newReg, String oldVer, String oldReg) throws IOException {
 
         File toWrite = new File("DS3PATCH.sql");
         FileOutputStream linesToWrite = new FileOutputStream(toWrite);
@@ -49,7 +49,7 @@ public class DataProcessing {
                 bw.write("`" + files.get(i).substring(files.get(i).indexOf("=") + 1, files.get(i).length() - 1) + "`,");
         }
 
-        bw.write(" VALUES (1.15, 1.35,");
+        bw.write(" VALUES (" + newVer + "," + newReg + ",");
 
         for (int i = 0; i < md.size(); i++) {
             if (i == files.size() - 1) {
@@ -70,7 +70,7 @@ public class DataProcessing {
                 bw.write("`" + files.get(i).substring(files.get(i).indexOf("=") + 1, files.get(i).length() - 1) + "`,");
         }
 
-        bw.write(" VALUES (1.35, 1.04,");
+        bw.write(" VALUES (" + oldVer + "," + oldReg + ",");
 
         for (int i = 0; i < old.size(); i++) {
             if (i == files.size() - 1) {
